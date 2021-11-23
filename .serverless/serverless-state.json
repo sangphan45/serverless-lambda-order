@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "bookshop",
+    "service": "bookshop-order",
     "serviceObject": {
-      "name": "bookshop"
+      "name": "bookshop-order"
     },
     "provider": {
       "name": "aws",
@@ -23,7 +23,7 @@
             "Resource": [
               {
                 "Fn::GetAtt": [
-                  "BookshopBooks",
+                  "BookshopOrders",
                   "Arn"
                 ]
               }
@@ -110,19 +110,19 @@
           "HelloLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/bookshop-dev-hello"
+              "LogGroupName": "/aws/lambda/bookshop-order-dev-hello"
             }
           },
           "CreateBookLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/bookshop-dev-createBook"
+              "LogGroupName": "/aws/lambda/bookshop-order-dev-createBook"
             }
           },
           "GetBookLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/bookshop-dev-getBook"
+              "LogGroupName": "/aws/lambda/bookshop-order-dev-getBook"
             }
           },
           "IamRoleLambdaExecution": {
@@ -150,7 +150,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "bookshop",
+                        "bookshop-order",
                         "dev",
                         "lambda"
                       ]
@@ -167,7 +167,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/bookshop-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/bookshop-order-dev*:*"
                           }
                         ]
                       },
@@ -178,7 +178,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/bookshop-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/bookshop-order-dev*:*:*"
                           }
                         ]
                       }
@@ -191,7 +191,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "bookshop",
+                    "bookshop-order",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -267,11 +267,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/bookshop/dev/1637684626499-2021-11-23T16:23:46.499Z/build/distributions/hello.zip"
+                "S3Key": "serverless/bookshop-order/dev/1637688004404-2021-11-23T17:20:04.404Z/build/distributions/hello.zip"
               },
               "Handler": "com.serverless.Handler",
               "Runtime": "java8",
-              "FunctionName": "bookshop-dev-hello",
+              "FunctionName": "bookshop-order-dev-hello",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -292,11 +292,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/bookshop/dev/1637684626499-2021-11-23T16:23:46.499Z/build/distributions/hello.zip"
+                "S3Key": "serverless/bookshop-order/dev/1637688004404-2021-11-23T17:20:04.404Z/build/distributions/hello.zip"
               },
-              "Handler": "com.serverless.CreateBookHandler",
+              "Handler": "com.serverless.CreateOrderHandler",
               "Runtime": "java8",
-              "FunctionName": "bookshop-dev-createBook",
+              "FunctionName": "bookshop-order-dev-createBook",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -317,11 +317,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/bookshop/dev/1637684626499-2021-11-23T16:23:46.499Z/build/distributions/hello.zip"
+                "S3Key": "serverless/bookshop-order/dev/1637688004404-2021-11-23T17:20:04.404Z/build/distributions/hello.zip"
               },
-              "Handler": "com.serverless.GetBookHandler",
+              "Handler": "com.serverless.GetOrderHandler",
               "Runtime": "java8",
-              "FunctionName": "bookshop-dev-getBook",
+              "FunctionName": "bookshop-order-dev-getBook",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -335,40 +335,40 @@
               "GetBookLogGroup"
             ]
           },
-          "HelloLambdaVersionSzABD6ePAw4kzfx2APHgkrJvJL4ciCcIuc0tg35VU0": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "HelloLambdaFunction"
-              },
-              "CodeSha256": "JwOB2min0GQcmrMfpEfDybmi67m5t+tPzrPP2vspcEk="
-            }
-          },
-          "CreateBookLambdaVersiondGGDNIJ598CB89w0Z7jBQw5F4SCr4xE1nQkqHYzT0": {
+          "CreateBookLambdaVersionsXCoJz22u03uSiCilawx6biWwmneQWOqWJqRX7Jw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateBookLambdaFunction"
               },
-              "CodeSha256": "JwOB2min0GQcmrMfpEfDybmi67m5t+tPzrPP2vspcEk="
+              "CodeSha256": "xwnhjJ51pMe7gcEDJWHSrJbV7Og0dxF1NujGp4JyHdg="
             }
           },
-          "GetBookLambdaVersionGz0jW0Y3re0L30XPnTNlQ46dLxFkUHFnIhzsJGtZdc": {
+          "HelloLambdaVersionbTOEkU6KWFTBU2w5nMGzV1PXuitUTLZh0ganRcSQhU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HelloLambdaFunction"
+              },
+              "CodeSha256": "xwnhjJ51pMe7gcEDJWHSrJbV7Og0dxF1NujGp4JyHdg="
+            }
+          },
+          "GetBookLambdaVersionHTKOFkfDBbhcpKgf4NE5Gh3onnXsiBb9BKs5jnPnIY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetBookLambdaFunction"
               },
-              "CodeSha256": "JwOB2min0GQcmrMfpEfDybmi67m5t+tPzrPP2vspcEk="
+              "CodeSha256": "xwnhjJ51pMe7gcEDJWHSrJbV7Og0dxF1NujGp4JyHdg="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-bookshop",
+              "Name": "dev-bookshop-order",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -484,7 +484,7 @@
               "GetBookLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1637684617103": {
+          "ApiGatewayDeployment1637687995364": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -574,7 +574,7 @@
           "ApiGatewayLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/api-gateway/bookshop-dev"
+              "LogGroupName": "/aws/api-gateway/bookshop-order-dev"
             }
           },
           "CustomApiGatewayAccountCloudWatchRole": {
@@ -615,7 +615,7 @@
                       "-",
                       [
                         "dev",
-                        "bookshop",
+                        "bookshop-order",
                         "custom-resources-lambda"
                       ]
                     ]
@@ -680,9 +680,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/bookshop/dev/1637684626499-2021-11-23T16:23:46.499Z/custom-resources.zip"
+                "S3Key": "serverless/bookshop-order/dev/1637688004404-2021-11-23T17:20:04.404Z/custom-resources.zip"
               },
-              "FunctionName": "bookshop-dev-custom-resource-apigw-cw-role",
+              "FunctionName": "bookshop-order-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
               "MemorySize": 1024,
               "Runtime": "nodejs12.x",
@@ -701,7 +701,7 @@
           "BookshopBooks": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
-              "TableName": "Bookshop-Books",
+              "TableName": "Bookshop-Orders",
               "AttributeDefinitions": [
                 {
                   "AttributeName": "id",
@@ -723,7 +723,7 @@
           "CWLSubFilterHelloLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop-order#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "HelloLogGroup"
@@ -733,7 +733,7 @@
           "CWLSubFilterCreateBookLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop-order#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "CreateBookLogGroup"
@@ -743,7 +743,7 @@
           "CWLSubFilterGetBookLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop-order#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "GetBookLogGroup"
@@ -753,7 +753,7 @@
           "CWLSubFilterApiGatewayLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop#dev",
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e46faac0-f668-4098-9694-27192b8cd956#fzKM5llFJklsSc5s4r#bookshop-order#dev",
               "FilterPattern": "\"SLS_ACCESS_LOG\"",
               "LogGroupName": {
                 "Ref": "ApiGatewayLogGroup"
@@ -767,7 +767,7 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-bookshop-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-bookshop-order-dev-ServerlessDeploymentBucketName"
             }
           },
           "EnterpriseLogAccessIamRole": {
@@ -778,34 +778,34 @@
               ]
             },
             "Export": {
-              "Name": "sls-bookshop-dev-EnterpriseLogAccessIamRole"
-            }
-          },
-          "HelloLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "HelloLambdaVersionSzABD6ePAw4kzfx2APHgkrJvJL4ciCcIuc0tg35VU0"
-            },
-            "Export": {
-              "Name": "sls-bookshop-dev-HelloLambdaFunctionQualifiedArn"
+              "Name": "sls-bookshop-order-dev-EnterpriseLogAccessIamRole"
             }
           },
           "CreateBookLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateBookLambdaVersiondGGDNIJ598CB89w0Z7jBQw5F4SCr4xE1nQkqHYzT0"
+              "Ref": "CreateBookLambdaVersionsXCoJz22u03uSiCilawx6biWwmneQWOqWJqRX7Jw"
             },
             "Export": {
-              "Name": "sls-bookshop-dev-CreateBookLambdaFunctionQualifiedArn"
+              "Name": "sls-bookshop-order-dev-CreateBookLambdaFunctionQualifiedArn"
+            }
+          },
+          "HelloLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HelloLambdaVersionbTOEkU6KWFTBU2w5nMGzV1PXuitUTLZh0ganRcSQhU"
+            },
+            "Export": {
+              "Name": "sls-bookshop-order-dev-HelloLambdaFunctionQualifiedArn"
             }
           },
           "GetBookLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetBookLambdaVersionGz0jW0Y3re0L30XPnTNlQ46dLxFkUHFnIhzsJGtZdc"
+              "Ref": "GetBookLambdaVersionHTKOFkfDBbhcpKgf4NE5Gh3onnXsiBb9BKs5jnPnIY"
             },
             "Export": {
-              "Name": "sls-bookshop-dev-GetBookLambdaFunctionQualifiedArn"
+              "Name": "sls-bookshop-order-dev-GetBookLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -831,7 +831,7 @@
               ]
             },
             "Export": {
-              "Name": "sls-bookshop-dev-ServiceEndpoint"
+              "Name": "sls-bookshop-order-dev-ServiceEndpoint"
             }
           }
         }
@@ -933,16 +933,16 @@
       "hello": {
         "handler": "com.serverless.Handler",
         "events": [],
-        "name": "bookshop-dev-hello",
+        "name": "bookshop-order-dev-hello",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionSzABD6ePAw4kzfx2APHgkrJvJL4ciCcIuc0tg35VU0"
+        "versionLogicalId": "HelloLambdaVersionbTOEkU6KWFTBU2w5nMGzV1PXuitUTLZh0ganRcSQhU"
       },
       "createBook": {
-        "handler": "com.serverless.CreateBookHandler",
+        "handler": "com.serverless.CreateOrderHandler",
         "events": [
           {
             "http": {
@@ -952,16 +952,16 @@
             }
           }
         ],
-        "name": "bookshop-dev-createBook",
+        "name": "bookshop-order-dev-createBook",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "CreateBookLambdaVersiondGGDNIJ598CB89w0Z7jBQw5F4SCr4xE1nQkqHYzT0"
+        "versionLogicalId": "CreateBookLambdaVersionsXCoJz22u03uSiCilawx6biWwmneQWOqWJqRX7Jw"
       },
       "getBook": {
-        "handler": "com.serverless.GetBookHandler",
+        "handler": "com.serverless.GetOrderHandler",
         "events": [
           {
             "http": {
@@ -971,13 +971,13 @@
             }
           }
         ],
-        "name": "bookshop-dev-getBook",
+        "name": "bookshop-order-dev-getBook",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "GetBookLambdaVersionGz0jW0Y3re0L30XPnTNlQ46dLxFkUHFnIhzsJGtZdc"
+        "versionLogicalId": "GetBookLambdaVersionHTKOFkfDBbhcpKgf4NE5Gh3onnXsiBb9BKs5jnPnIY"
       }
     },
     "resources": {
@@ -985,7 +985,7 @@
         "BookshopBooks": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "TableName": "Bookshop-Books",
+            "TableName": "Bookshop-Orders",
             "AttributeDefinitions": [
               {
                 "AttributeName": "id",
@@ -1028,7 +1028,7 @@
           "s_*.js",
           "serverless_sdk/**"
         ],
-        "artifactDirectoryName": "serverless/bookshop/dev/1637684626499-2021-11-23T16:23:46.499Z"
+        "artifactDirectoryName": "serverless/bookshop-order/dev/1637688004404-2021-11-23T17:20:04.404Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -1046,7 +1046,7 @@
     "appUid": "fzKM5llFJklsSc5s4r"
   },
   "package": {
-    "artifactDirectoryName": "serverless/bookshop/dev/1637684626499-2021-11-23T16:23:46.499Z",
+    "artifactDirectoryName": "serverless/bookshop-order/dev/1637688004404-2021-11-23T17:20:04.404Z",
     "artifact": "build/distributions/hello.zip"
   }
 }

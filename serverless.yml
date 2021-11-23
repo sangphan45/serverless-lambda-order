@@ -30,17 +30,17 @@ package:
 functions:
   hello:
     handler: com.serverless.Handler
-  createBook:
+  createOrder:
     handler: com.serverless.CreateOrderHandler
     events:
       - http:
-          path: /book
+          path: /order
           method: post
-  getBook:
+  getOrder:
     handler: com.serverless.GetOrderHandler
     events:
       - http:
-          path: /book
+          path: /order
           method: get
 
 resources:
