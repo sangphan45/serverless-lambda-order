@@ -1,0 +1,60 @@
+
+service: bookshop-order
+# app and org for use with dashboard.serverless.com
+app: bookshopmanager
+org: sangphan45
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: java8
+  httpApi:
+    cors: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+        Resource:
+          - { "Fn::GetAtt": [ "BookshopOrders", "Arn" ] }
+plugins:
+  - serverless-offline
+package:
+  artifact: build/distributions/hello.zip
+
+functions:
+  hello:
+    handler: com.serverless.Handler
+  createBook:
+    handler: com.serverless.CreateOrderHandler
+    events:
+      - http:
+          path: /book
+          method: post
+  getBook:
+    handler: com.serverless.GetOrderHandler
+    events:
+      - http:
+          path: /book
+          method: get
+
+resources:
+  Resources:
+    BookshopBooks:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Bookshop-Orders
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
