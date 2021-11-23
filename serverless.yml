@@ -45,7 +45,7 @@ functions:
 
 resources:
   Resources:
-    BookshopBooks:
+    BookshopOrders:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: Bookshop-Orders
